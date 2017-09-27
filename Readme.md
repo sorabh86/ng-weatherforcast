@@ -1,5 +1,3 @@
-<style> @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"); .bg-primary a {color:#ff0!important}</style>
-
 # Overview
 This website is prepared as a sample project.
 
