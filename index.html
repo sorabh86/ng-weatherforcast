@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weatherForcastApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather Forcast (ANGULARJS)</title>
+
+  <link rel="stylesheet" href="../../../bootstrap/3.2.0/css/bootstrap.css">
+
+  <script src="../../1.6.6/angular.js"></script>
+  <script src="../../1.6.6/angular-route.js"></script>
+  <script src="../../1.6.6/angular-resource.js"></script>
+ 
+  <script src="app.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand nav-right">Weather Forcast</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div ng-view></div>
+    </div>
+  </header>
+</body>
+</html>
