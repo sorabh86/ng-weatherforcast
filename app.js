@@ -29,10 +29,16 @@ weatherForcastApp.config(function($routeProvider, $sceDelegateProvider){
 });
 
 // SERVICES
-weatherForcastApp.service('cityService', function(){
+weatherForcastApp.service('gModel', function(){
   this.appId = "c629423cb43b0934aee9e92f67866836";
   this.city = "Delhi, IN";
   this.url = "http://api.openweathermap.org/data/2.5/forecast/";
+});
+weatherForcastApp.service('weatherService', function($resource,gModel){
+  this.getWeather = function(appId, city, days) {
+    var weatherAPI = $resource(gModel.url, { get:{ method:'JSONP' } });
+    return weatherAPI.get({appid:appId, q:city, cnt:days});
+  };
 });
 
 // DIRECTIVES
@@ -51,28 +57,24 @@ weatherForcastApp.directive("forcastElement",function(){
 });
 
 // CONTROLLERS
-weatherForcastApp.controller('mainController',['$scope', '$location', 'cityService', function($scope, $location, cityService){
-  $scope.city = cityService.city;
+weatherForcastApp.controller('mainController',['$scope', '$location', 'gModel', function($scope, $location, gModel){
+  $scope.city = gModel.city;
 
   $scope.submitForm = function(){
     $location.url("/forcast");
   };
 
   $scope.$watch('city', function(){
-    cityService.city = $scope.city;
+    gModel.city = $scope.city;
   });
   
 }]);
-weatherForcastApp.controller('forcastController',['$scope', '$resource', '$routeParams', 'cityService', 
-  function($scope, $resource, $routeParams, cityService){
-  $scope.city = cityService.city;
+weatherForcastApp.controller('forcastController',['$scope', '$routeParams', 'gModel', 'weatherService',
+  function($scope, $routeParams, gModel, weatherService){
+  $scope.city = gModel.city;
   $scope.days = $routeParams.days || 2;
 
-  $scope.weatherAPI = $resource(cityService.url, { 
-    get:{ method:'JSONP' } 
-  });
-
-  $scope.weatherResult = $scope.weatherAPI.get({appid:cityService.appId, q:$scope.city, cnt:$scope.days});
+  $scope.weatherResult = weatherService.getWeather(gModel.appId, $scope.city, $scope.days);
   
   $scope.convertToDate = function(dt){
     return new Date(dt*1000);
