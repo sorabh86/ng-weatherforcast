@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{convertDate({ dt:weatherObj.dt }) | date : 'MMM d, y h:mm:ss a'}}</h3>
+  </div>
+  <div class="panel-body">
+    Kelvin : {{ weatherObj.main.temp }} | 
+    Celsius: {{ convertCelsius({kel:weatherObj.main.temp}) }} |
+    Fahrenheit: {{ convertFahrenheit({kel:weatherObj.main.temp}) }}
+  </div>
+</div>

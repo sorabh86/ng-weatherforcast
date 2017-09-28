@@ -1,2 +1,18 @@
 <a href="#">back</a>
-{{ city }}
+
+<h2>Forcast for <strong>{{city}}</strong></h2>
+
+<div class="btn-group pull-right">
+  <a ng-class="{'days-active':days==='2'}" href="#!/forcast/2" role="button">2</a> |
+  <a ng-class="{'days-active':days==='5'}" href="#!/forcast/5" role="button">5</a> |
+  <a ng-class="{'days-active':days==='10'}" href="#!/forcast/10" role="button">10</a> |
+  <a ng-class="{'days-active':days==='0'}" href="#!/forcast/0" role="button">all</a>
+</div>
+<p class="clearfix"></p>
+<div class="list-group">
+
+  <forcast-element ng-repeat="item in weatherResult.list" weather-obj="item" convert-date="convertToDate(dt)" 
+    convert-celsius="kelvin2Celsius(kel)" convert-fahrenheit="kelvin2Fahrenheit(kel)"></forcast-element>
+
+</div>
+
